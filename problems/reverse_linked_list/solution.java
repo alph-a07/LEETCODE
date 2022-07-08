@@ -2,7 +2,7 @@
 class Solution {
     public ListNode reverseList(ListNode head) {
 
-        if (head==null){
+        if (head == null) {
             return null;
         }
 

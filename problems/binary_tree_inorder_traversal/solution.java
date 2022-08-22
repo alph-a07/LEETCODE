@@ -1,4 +1,3 @@
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -23,8 +22,7 @@ class TreeNode {
     TreeNode left;
     TreeNode right;
 
-    TreeNode() {
-    }
+    TreeNode() {}
 
     TreeNode(int val) {
         this.val = val;
@@ -39,23 +37,39 @@ class TreeNode {
 
 // left root right
 class Solution {
+
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> ans = new LinkedList<>();
-        Stack<TreeNode> stack = new Stack<>();
 
-        TreeNode pointer = root;
+        if (root == null) return ans;
 
-        while (!stack.isEmpty() || pointer != null) {
-            if (pointer != null) {
-                stack.push(pointer);
-                pointer = pointer.left;
-            } else {
-                TreeNode temp = stack.pop();
-                ans.add(temp.val);
-                pointer = temp.right;
+        TreeNode curr = root;
+
+        while (curr != null) {
+            // left is null
+            if (curr.left == null) {
+                ans.add(curr.val); // add root
+                curr = curr.right; // move right
+            }
+            // left exists
+            else {
+                TreeNode pre = curr.left;
+                // rightmost element of the left subtree
+                while (pre.right != null && pre.right != curr) pre = pre.right;
+
+                // temporarry link to backtrack
+                if (pre.right == null) {
+                    pre.right = curr;
+                    curr = curr.left; // move left
+                }
+                // restoring tree
+                else {
+                    pre.right = null;
+                    ans.add(curr.val);
+                    curr = curr.right;
+                }
             }
         }
-
         return ans;
     }
 }

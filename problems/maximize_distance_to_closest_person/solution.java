@@ -1,7 +1,7 @@
 class Solution {
 
     public int maxDistToClosest(int[] seats) {
-        // appending 1 before the original array
+        // adding 1 before the original array
         int[] s = new int[seats.length + 1];
         int n = s.length;
         s[0] = 1;

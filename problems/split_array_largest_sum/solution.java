@@ -18,6 +18,7 @@ public class Solution {
         }
         return (int)l;
     }
+    
     public boolean valid(long target, int[] nums, int m) {
         int count = 1;
         long total = 0;
